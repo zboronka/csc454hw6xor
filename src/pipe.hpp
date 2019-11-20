@@ -42,7 +42,7 @@ namespace devsim {
 
 			template <typename T>
 			Pipe(Port<T>* in, Port<T>* out, MooreMachine* imach, MooreMachine* omach) :
-				p(new PipeModel(in, out)),
+				p(new PipeModel<T>(in, out)),
 				input_machine(imach),
 				output_machine(omach) { in->link(); out->link(); }
 			~Pipe() { delete p; }
