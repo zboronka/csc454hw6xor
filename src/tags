@@ -1,0 +1,121 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/3fdf28bc/
+COLORS_HPP	colors.hpp	/^#define COLORS_HPP$/;"	d
+CON	event.hpp	/^	enum Delta { EXT, INT, CON };$/;"	e	enum:devsim::Delta
+CONCOLOR	colors.hpp	/^	const std::string CONCOLOR = YELLOW;$/;"	v	namespace:colors	typeref:typename:const std::string
+CYAN	colors.hpp	/^	const std::string CYAN     = "\\u001b[36m";$/;"	v	namespace:colors	typeref:typename:const std::string
+Delta	event.hpp	/^	enum Delta { EXT, INT, CON };$/;"	g	namespace:devsim
+EVENT_HPP	event.hpp	/^#define EVENT_HPP$/;"	d
+EXT	event.hpp	/^	enum Delta { EXT, INT, CON };$/;"	e	enum:devsim::Delta
+EXTCOLOR	colors.hpp	/^	const std::string EXTCOLOR = GREEN;$/;"	v	namespace:colors	typeref:typename:const std::string
+Event	event.cpp	/^	Event::Event(Delta delta, TotalTime time, MooreMachine* target) {$/;"	f	class:devsim::Event
+Event	event.hpp	/^			Event() : time(TotalTime()), target(nullptr), delta(EXT) {}$/;"	f	class:devsim::Event
+Event	event.hpp	/^	class Event {$/;"	c	namespace:devsim
+GREEN	colors.hpp	/^	const std::string GREEN    = "\\u001b[32m";$/;"	v	namespace:colors	typeref:typename:const std::string
+INPUT	colors.hpp	/^	const std::string INPUT    = PURPLE;$/;"	v	namespace:colors	typeref:typename:const std::string
+INT	event.hpp	/^	enum Delta { EXT, INT, CON };$/;"	e	enum:devsim::Delta
+INTCOLOR	colors.hpp	/^	const std::string INTCOLOR = RED;$/;"	v	namespace:colors	typeref:typename:const std::string
+MACHINE_HPP	machine.hpp	/^#define MACHINE_HPP$/;"	d
+MOOREMACHINE_HPP	mooremachine.hpp	/^#define MOOREMACHINE_HPP$/;"	d
+Machine	machine.cpp	/^Machine::Machine(const Machine& other) {$/;"	f	class:Machine
+Machine	machine.hpp	/^		Machine(double t, int priority) { this->t = t; this->set_priority(priority); }$/;"	f	class:Machine
+Machine	machine.hpp	/^class Machine: public MooreMachine {$/;"	c
+MooreMachine	mooremachine.cpp	/^	MooreMachine::MooreMachine(const MooreMachine& other) {$/;"	f	class:devsim::MooreMachine
+MooreMachine	mooremachine.hpp	/^			MooreMachine() : internal(nullptr) {}$/;"	f	class:devsim::MooreMachine
+MooreMachine	mooremachine.hpp	/^	class MooreMachine {$/;"	c	namespace:devsim
+OUTPUT	colors.hpp	/^	const std::string OUTPUT   = CYAN;$/;"	v	namespace:colors	typeref:typename:const std::string
+PIPE_HPP	pipe.hpp	/^#define PIPE_HPP$/;"	d
+PORT_HPP	port.hpp	/^#define PORT_HPP$/;"	d
+PURPLE	colors.hpp	/^	const std::string PURPLE   = "\\u001b[35m";$/;"	v	namespace:colors	typeref:typename:const std::string
+Pipe	pipe.cpp	/^	Pipe::Pipe(const Pipe& other) {$/;"	f	class:devsim::Pipe
+Pipe	pipe.hpp	/^			Pipe(Port<T>* in, Port<T>* out, MooreMachine* imach, MooreMachine* omach) :$/;"	f	class:devsim::Pipe
+Pipe	pipe.hpp	/^	class Pipe {$/;"	c	namespace:devsim
+PipeConcept	pipe.hpp	/^			class PipeConcept {$/;"	c	class:devsim::Pipe
+PipeModel	pipe.hpp	/^					PipeModel() : $/;"	f	class:devsim::Pipe::PipeModel
+PipeModel	pipe.hpp	/^					PipeModel(Port<T>* in, Port<T>* out) : $/;"	f	class:devsim::Pipe::PipeModel
+PipeModel	pipe.hpp	/^			class PipeModel : public PipeConcept {$/;"	c	class:devsim::Pipe
+Port	port.hpp	/^	class Port {$/;"	c	namespace:devsim
+RED	colors.hpp	/^	const std::string RED      = "\\u001b[31m";$/;"	v	namespace:colors	typeref:typename:const std::string
+RESET	colors.hpp	/^	const std::string RESET    = "\\u001b[39;49m";$/;"	v	namespace:colors	typeref:typename:const std::string
+TOTALTIME_HPP	totaltime.hpp	/^#define TOTALTIME_HPP$/;"	d
+TotalTime	totaltime.hpp	/^			TotalTime() : real_time(0), discrete_time(0) {}$/;"	f	class:devsim::TotalTime
+TotalTime	totaltime.hpp	/^			TotalTime(double real_time, int discrete_time) { this->real_time = real_time; this->discrete_/;"	f	class:devsim::TotalTime
+TotalTime	totaltime.hpp	/^	class TotalTime {$/;"	c	namespace:devsim
+YELLOW	colors.hpp	/^	const std::string YELLOW   = "\\u001b[33m";$/;"	v	namespace:colors	typeref:typename:const std::string
+accesses	port.hpp	/^			int accesses;$/;"	m	class:devsim::Port	typeref:typename:int
+advance	totaltime.cpp	/^	TotalTime TotalTime::advance(TotalTime b) {$/;"	f	class:devsim::TotalTime	typeref:typename:TotalTime
+advance	totaltime.cpp	/^	TotalTime TotalTime::advance(double b) {$/;"	f	class:devsim::TotalTime	typeref:typename:TotalTime
+available	port.hpp	/^			bool available() { return accesses < links; }$/;"	f	class:devsim::Port	typeref:typename:bool
+colors	colors.hpp	/^namespace colors {$/;"	n
+compare	event.cpp	/^	bool Event::compare(Event const& a, Event const& b) {$/;"	f	class:devsim::Event	typeref:typename:bool
+delta	event.hpp	/^			Delta delta;$/;"	m	class:devsim::Event	typeref:typename:Delta
+delta_con	machine.hpp	/^		void delta_con() { p += input->get() - 1; s = t; }$/;"	f	class:Machine	typeref:typename:void
+delta_ext	machine.hpp	/^		void delta_ext(double e) { s = p == 0 ? t : s - e; p += input->get(); } $/;"	f	class:Machine	typeref:typename:void
+delta_int	machine.hpp	/^		void delta_int() { p -= 1; s = t; }$/;"	f	class:Machine	typeref:typename:void
+devsim	event.cpp	/^namespace devsim {$/;"	n	file:
+devsim	event.hpp	/^namespace devsim {$/;"	n
+devsim	mooremachine.cpp	/^namespace devsim {$/;"	n	file:
+devsim	mooremachine.hpp	/^namespace devsim {$/;"	n
+devsim	pipe.cpp	/^namespace devsim {$/;"	n	file:
+devsim	pipe.hpp	/^namespace devsim {$/;"	n
+devsim	port.hpp	/^namespace devsim {$/;"	n
+devsim	totaltime.cpp	/^namespace devsim {$/;"	n	file:
+devsim	totaltime.hpp	/^namespace devsim {$/;"	n
+discrete_time	totaltime.hpp	/^			int discrete_time;$/;"	m	class:devsim::TotalTime	typeref:typename:int
+get	port.hpp	/^			T get() { if(accesses < links) { accesses++; return payload; } throw "PortNotOpenException"; /;"	f	class:devsim::Port	typeref:typename:T
+get_discrete	totaltime.hpp	/^			int get_discrete() { return discrete_time; }$/;"	f	class:devsim::TotalTime	typeref:typename:int
+get_internal	mooremachine.hpp	/^			Event* get_internal() { return internal; }$/;"	f	class:devsim::MooreMachine	typeref:typename:Event *
+get_priority	mooremachine.hpp	/^			int get_priority() { return priority; }$/;"	f	class:devsim::MooreMachine	typeref:typename:int
+get_real	totaltime.hpp	/^			double get_real() { return real_time; }$/;"	f	class:devsim::TotalTime	typeref:typename:double
+input	machine.hpp	/^		Port<int>* input = nullptr;$/;"	m	class:Machine	typeref:typename:Port<int> *
+input_machine	pipe.hpp	/^			MooreMachine* input_machine;$/;"	m	class:devsim::Pipe	typeref:typename:MooreMachine *
+input_port	pipe.hpp	/^					Port<T>* input_port;$/;"	m	class:devsim::Pipe::PipeModel	typeref:typename:Port<T> *
+insertion	machine.hpp	/^		std::string insertion() const { return "hhhh"; }$/;"	f	class:Machine	typeref:typename:std::string
+internal	mooremachine.hpp	/^			Event* internal;$/;"	m	class:devsim::MooreMachine	typeref:typename:Event *
+lambda	machine.hpp	/^		void lambda() { output->set(1); }$/;"	f	class:Machine	typeref:typename:void
+length	totaltime.cpp	/^	double TotalTime::length(TotalTime b) {$/;"	f	class:devsim::TotalTime	typeref:typename:double
+link	port.hpp	/^			void link() { links++; }$/;"	f	class:devsim::Port	typeref:typename:void
+links	port.hpp	/^			int links;$/;"	m	class:devsim::Port	typeref:typename:int
+main	hw6.cpp	/^int main() {$/;"	f	typeref:typename:int
+operator !=	totaltime.cpp	/^	bool operator!=(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator <	mooremachine.cpp	/^	bool operator<(MooreMachine const& a, MooreMachine const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator <	totaltime.cpp	/^	bool operator<(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator <<	event.cpp	/^	std::ostream& operator<<(std::ostream& strm, Event const& a) {$/;"	f	namespace:devsim	typeref:typename:std::ostream &
+operator <<	mooremachine.cpp	/^	std::ostream& operator<<(std::ostream& strm, MooreMachine const& m) {$/;"	f	namespace:devsim	typeref:typename:std::ostream &
+operator <<	totaltime.cpp	/^	std::ostream& operator<<(std::ostream &strm, TotalTime const& a) {$/;"	f	namespace:devsim	typeref:typename:std::ostream &
+operator <=	totaltime.cpp	/^	bool operator<=(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator =	machine.cpp	/^Machine& Machine::operator=(const Machine& other) {$/;"	f	class:Machine	typeref:typename:Machine &
+operator =	mooremachine.cpp	/^	MooreMachine& MooreMachine::operator=(const MooreMachine& other) {$/;"	f	class:devsim::MooreMachine	typeref:typename:MooreMachine &
+operator =	pipe.cpp	/^	Pipe& Pipe::operator=(const Pipe& other) {$/;"	f	class:devsim::Pipe	typeref:typename:Pipe &
+operator ==	event.cpp	/^	bool operator==(Event const& a, Event const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator ==	mooremachine.cpp	/^	bool operator==(MooreMachine const& a, MooreMachine const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator ==	totaltime.cpp	/^	bool operator==(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator >	mooremachine.cpp	/^	bool operator>(MooreMachine const& a, MooreMachine const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator >	totaltime.cpp	/^	bool operator>(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+operator >=	totaltime.cpp	/^	bool operator>=(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
+output	machine.hpp	/^		Port<int>* output = nullptr;$/;"	m	class:Machine	typeref:typename:Port<int> *
+output_machine	pipe.hpp	/^			MooreMachine* output_machine;$/;"	m	class:devsim::Pipe	typeref:typename:MooreMachine *
+output_port	pipe.hpp	/^					Port<T>* output_port;$/;"	m	class:devsim::Pipe::PipeModel	typeref:typename:Port<T> *
+p	machine.hpp	/^		int p = 0;$/;"	m	class:Machine	typeref:typename:int
+p	pipe.hpp	/^			PipeConcept* p;$/;"	m	class:devsim::Pipe	typeref:typename:PipeConcept *
+payload	port.hpp	/^			T payload;$/;"	m	class:devsim::Port	typeref:typename:T
+pipe	pipe.hpp	/^					bool pipe() {$/;"	f	class:devsim::Pipe::PipeModel	typeref:typename:bool
+pipe	pipe.hpp	/^			bool pipe() { return p->pipe(); }$/;"	f	class:devsim::Pipe	typeref:typename:bool
+priority	mooremachine.hpp	/^			int priority;$/;"	m	class:devsim::MooreMachine	typeref:typename:int
+real_time	totaltime.hpp	/^			double real_time;$/;"	m	class:devsim::TotalTime	typeref:typename:double
+s	machine.hpp	/^		double s = 0;$/;"	m	class:Machine	typeref:typename:double
+set	port.hpp	/^			void set(T t) { payload = t; accesses = 0; }$/;"	f	class:devsim::Port	typeref:typename:void
+set_internal	mooremachine.cpp	/^	void MooreMachine::set_internal(Event* internal) {$/;"	f	class:devsim::MooreMachine	typeref:typename:void
+set_priority	mooremachine.hpp	/^			void set_priority(int priority) { this->priority = priority; }$/;"	f	class:devsim::MooreMachine	typeref:typename:void
+t	machine.hpp	/^		double t = 0;$/;"	m	class:Machine	typeref:typename:double
+ta	machine.hpp	/^		double ta() { return p > 0 ? s : -1; }$/;"	f	class:Machine	typeref:typename:double
+target	event.hpp	/^			MooreMachine* target;$/;"	m	class:devsim::Event	typeref:typename:MooreMachine *
+time	event.hpp	/^			TotalTime time;$/;"	m	class:devsim::Event	typeref:typename:TotalTime
+~Machine	machine.hpp	/^		~Machine() { delete input; delete output; }$/;"	f	class:Machine
+~MooreMachine	mooremachine.cpp	/^	MooreMachine::~MooreMachine() {$/;"	f	class:devsim::MooreMachine
+~Pipe	pipe.hpp	/^			~Pipe() { delete p; }$/;"	f	class:devsim::Pipe

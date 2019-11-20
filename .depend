@@ -1,0 +1,11 @@
+hw6.o: src/hw6.cpp src/port.hpp src/pipe.hpp src/mooremachine.hpp \
+ src/event.hpp src/totaltime.hpp src/colors.hpp src/machine.hpp
+totaltime.o: src/totaltime.cpp src/totaltime.hpp
+machine.o: src/machine.cpp src/machine.hpp src/mooremachine.hpp \
+ src/event.hpp src/totaltime.hpp src/colors.hpp src/port.hpp
+mooremachine.o: src/mooremachine.cpp src/mooremachine.hpp src/event.hpp \
+ src/totaltime.hpp src/colors.hpp
+event.o: src/event.cpp src/event.hpp src/totaltime.hpp \
+ src/mooremachine.hpp src/colors.hpp
+pipe.o: src/pipe.cpp src/pipe.hpp src/port.hpp src/mooremachine.hpp \
+ src/event.hpp src/totaltime.hpp src/colors.hpp
