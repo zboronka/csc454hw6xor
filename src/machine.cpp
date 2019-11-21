@@ -6,16 +6,16 @@ Machine::Machine(const Machine& other) {
 	t = other.t;
 
 	if(other.input != nullptr) {
-		input = new Port<int>();
-		memcpy(input, other.input, sizeof(Port<int>));
+		input = new devsim::Port<int>();
+		memcpy(input, other.input, sizeof(devsim::Port<int>));
 	}
 	else {
 		input = nullptr;
 	}
 
 	if(other.output != nullptr) {
-		output = new Port<int>();
-		memcpy(output, other.output, sizeof(Port<int>));
+		output = new devsim::Port<int>();
+		memcpy(output, other.output, sizeof(devsim::Port<int>));
 	}
 	else {
 		output = nullptr;
@@ -32,25 +32,25 @@ Machine& Machine::operator=(const Machine& other) {
 			delete input;
 		}
 		else {
-			input = new Port<int>();
+			input = new devsim::Port<int>();
 		}
 
 		if(output != nullptr) {
 			delete output;
 		}
 		else {
-			output = new Port<int>();
+			output = new devsim::Port<int>();
 		}
 
 		if(other.input != nullptr) {
-			memcpy(input, other.input, sizeof(Port<int>));
+			memcpy(input, other.input, sizeof(devsim::Port<int>));
 		}
 		else {
 			input = nullptr;
 		}
 
 		if(other.output != nullptr) {
-			memcpy(output, other.output, sizeof(Port<int>));
+			memcpy(output, other.output, sizeof(devsim::Port<int>));
 		}
 		else {
 			output = nullptr;

@@ -24,7 +24,7 @@ MACHINE_HPP	machine.hpp	/^#define MACHINE_HPP$/;"	d
 MOOREMACHINE_HPP	mooremachine.hpp	/^#define MOOREMACHINE_HPP$/;"	d
 Machine	machine.cpp	/^Machine::Machine(const Machine& other) {$/;"	f	class:Machine
 Machine	machine.hpp	/^		Machine(double t, int priority) { this->t = t; this->set_priority(priority); }$/;"	f	class:Machine
-Machine	machine.hpp	/^class Machine: public MooreMachine {$/;"	c
+Machine	machine.hpp	/^class Machine: public devsim::MooreMachine {$/;"	c
 MooreMachine	mooremachine.cpp	/^	MooreMachine::MooreMachine(const MooreMachine& other) {$/;"	f	class:devsim::MooreMachine
 MooreMachine	mooremachine.hpp	/^			MooreMachine() : internal(nullptr) {}$/;"	f	class:devsim::MooreMachine
 MooreMachine	mooremachine.hpp	/^	class MooreMachine {$/;"	c	namespace:devsim
@@ -72,10 +72,10 @@ get_discrete	totaltime.hpp	/^			int get_discrete() { return discrete_time; }$/;"
 get_internal	mooremachine.hpp	/^			Event* get_internal() { return internal; }$/;"	f	class:devsim::MooreMachine	typeref:typename:Event *
 get_priority	mooremachine.hpp	/^			int get_priority() { return priority; }$/;"	f	class:devsim::MooreMachine	typeref:typename:int
 get_real	totaltime.hpp	/^			double get_real() { return real_time; }$/;"	f	class:devsim::TotalTime	typeref:typename:double
-input	machine.hpp	/^		Port<int>* input = nullptr;$/;"	m	class:Machine	typeref:typename:Port<int> *
+input	machine.hpp	/^		devsim::Port<int>* input = nullptr;$/;"	m	class:Machine	typeref:typename:devsim::Port<int> *
 input_machine	pipe.hpp	/^			MooreMachine* input_machine;$/;"	m	class:devsim::Pipe	typeref:typename:MooreMachine *
 input_port	pipe.hpp	/^					Port<T>* input_port;$/;"	m	class:devsim::Pipe::PipeModel	typeref:typename:Port<T> *
-insertion	machine.hpp	/^		std::string insertion() const { return "hhhh"; }$/;"	f	class:Machine	typeref:typename:std::string
+insertion	machine.hpp	/^		std::string insertion() const { return "" + p; }$/;"	f	class:Machine	typeref:typename:std::string
 internal	mooremachine.hpp	/^			Event* internal;$/;"	m	class:devsim::MooreMachine	typeref:typename:Event *
 lambda	machine.hpp	/^		void lambda() { output->set(1); }$/;"	f	class:Machine	typeref:typename:void
 length	totaltime.cpp	/^	double TotalTime::length(TotalTime b) {$/;"	f	class:devsim::TotalTime	typeref:typename:double
@@ -98,7 +98,7 @@ operator ==	totaltime.cpp	/^	bool operator==(TotalTime const& a, TotalTime const
 operator >	mooremachine.cpp	/^	bool operator>(MooreMachine const& a, MooreMachine const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
 operator >	totaltime.cpp	/^	bool operator>(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
 operator >=	totaltime.cpp	/^	bool operator>=(TotalTime const& a, TotalTime const& b) {$/;"	f	namespace:devsim	typeref:typename:bool
-output	machine.hpp	/^		Port<int>* output = nullptr;$/;"	m	class:Machine	typeref:typename:Port<int> *
+output	machine.hpp	/^		devsim::Port<int>* output = nullptr;$/;"	m	class:Machine	typeref:typename:devsim::Port<int> *
 output_machine	pipe.hpp	/^			MooreMachine* output_machine;$/;"	m	class:devsim::Pipe	typeref:typename:MooreMachine *
 output_port	pipe.hpp	/^					Port<T>* output_port;$/;"	m	class:devsim::Pipe::PipeModel	typeref:typename:Port<T> *
 p	machine.hpp	/^		int p = 0;$/;"	m	class:Machine	typeref:typename:int

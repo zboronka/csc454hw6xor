@@ -4,17 +4,15 @@
 #include "mooremachine.hpp"
 #include "port.hpp"
 
-using namespace devsim;
-
-class Machine: public MooreMachine {
+class Machine: public devsim::MooreMachine {
 	private:
 		int p = 0;
 
 		double s = 0;
 		double t = 0;
 	public:
-		Port<int>* input = nullptr;
-		Port<int>* output = nullptr;
+		devsim::Port<int>* input = nullptr;
+		devsim::Port<int>* output = nullptr;
 
 		Machine(double t, int priority) { this->t = t; this->set_priority(priority); }
 		~Machine() { delete input; delete output; }
@@ -29,7 +27,7 @@ class Machine: public MooreMachine {
 		void delta_ext(double e) { s = p == 0 ? t : s - e; p += input->get(); } 
 		void delta_con() { p += input->get() - 1; s = t; }
 
-		std::string insertion() const { return "hhhh"; }
+		std::string insertion() const { return "" + p; }
 };
 
 #endif
