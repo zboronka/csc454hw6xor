@@ -21,11 +21,11 @@ int main() {
 	Port<int>* in = new Port<int>();
 	Port<int>* out = new Port<int>();
 
-	Machine* press = new Machine(1,0);
+	Machine* press = new Machine(devsim::SECOND,0);
 	press->input = new Port<int>();
 	press->output = new Port<int>();
 
-	Machine* drill = new Machine(2,1);
+	Machine* drill = new Machine(devsim::SECOND*2,1);
 	drill->input = new Port<int>();
 	drill->output = new Port<int>();
 
@@ -38,7 +38,7 @@ int main() {
 
 	std::vector<Event>* pqueue = new std::vector<Event>();
 
-	std::unordered_map<double,int> trajectory;
+	std::unordered_map<long long,int> trajectory;
 	std::regex input("\\((\\d*\\.\\d*|\\d*),(\\d*)\\)");
 	std::smatch matches;
 
@@ -47,7 +47,7 @@ int main() {
 		auto words_begin = std::sregex_iterator(command.begin(), command.end(), input);
 		auto words_end = std::sregex_iterator();
 		for(std::sregex_iterator i = words_begin; i != words_end; i++) {
-			double time = atof((*i)[1].str().c_str());
+			long long time = (long long)devsim::SECOND*atof((*i)[1].str().c_str());
 			pqueue->push_back(Event(EXT, TotalTime(time, 0), press));
 			make_heap(pqueue->begin(), pqueue->end(), Event::compare);
 			trajectory[time] = atoi((*i)[2].str().c_str());
@@ -58,7 +58,7 @@ int main() {
 		Event e = pqueue->front();
 		pqueue->erase(pqueue->begin());
 		make_heap(pqueue->begin(), pqueue->end(), Event::compare);
-		double elapse = current.length(e.time);
+		long long elapse = current.length(e.time);
 
 		if(trajectory.find(e.time.get_real()) != trajectory.end() && e.target == press && e.delta == EXT) {
 			in->set(trajectory[e.time.get_real()]);

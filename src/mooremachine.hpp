@@ -13,12 +13,12 @@ namespace devsim {
 			int priority;
 
 		public:
-			virtual double ta() = 0;
+			virtual long long ta() = 0;
 
 			virtual void lambda() = 0;
 
 			virtual void delta_int() = 0;
-			virtual void delta_ext(double) = 0;
+			virtual void delta_ext(long long) = 0;
 			virtual void delta_con() = 0;
 
 			MooreMachine() : internal(nullptr) {}

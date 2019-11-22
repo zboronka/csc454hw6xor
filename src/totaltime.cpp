@@ -26,18 +26,18 @@ namespace devsim {
 	}
 
 	std::ostream& operator<<(std::ostream &strm, TotalTime const& a) {
-		return strm << "(" << a.real_time << ", " << a.discrete_time << ")";
+		return strm << "(" << (long double)a.real_time/SECOND << ", " << a.discrete_time << ")";
 	}
 
 	TotalTime TotalTime::advance(TotalTime b) {
 		return b.real_time == 0 ? TotalTime(real_time, discrete_time + b.discrete_time) : TotalTime(real_time + b.real_time, 0);
 	}
 
-	TotalTime TotalTime::advance(double b) {
+	TotalTime TotalTime::advance(long long b) {
 		return TotalTime(real_time + b, 0);
 	}
 
-	double TotalTime::length(TotalTime b) {
+	long long TotalTime::length(TotalTime b) {
 		return b.real_time - real_time;
 	}
 }
