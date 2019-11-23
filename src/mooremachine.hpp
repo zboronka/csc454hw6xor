@@ -13,7 +13,7 @@ namespace devsim {
 			int priority;
 
 		protected:
-			TotalTime lastchange;
+			TotalTime lastdelta;
 
 		public:
 			virtual long long ta() = 0;
@@ -24,7 +24,7 @@ namespace devsim {
 			virtual void delta_ext(TotalTime) = 0;
 			virtual void delta_con(TotalTime) = 0;
 
-			MooreMachine() : internal(nullptr), lastchange(TotalTime()) {}
+			MooreMachine() : internal(nullptr), lastdelta(TotalTime()) {}
 			~MooreMachine();
 			MooreMachine(const MooreMachine& other);
 			MooreMachine& operator=(const MooreMachine& other);
