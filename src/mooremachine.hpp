@@ -12,16 +12,19 @@ namespace devsim {
 			Event* internal;
 			int priority;
 
+		protected:
+			TotalTime lastchange;
+
 		public:
 			virtual long long ta() = 0;
 
 			virtual void lambda() = 0;
 
-			virtual void delta_int() = 0;
-			virtual void delta_ext(long long) = 0;
-			virtual void delta_con() = 0;
+			virtual void delta_int(TotalTime) = 0;
+			virtual void delta_ext(TotalTime) = 0;
+			virtual void delta_con(TotalTime) = 0;
 
-			MooreMachine() : internal(nullptr) {}
+			MooreMachine() : internal(nullptr), lastchange(TotalTime()) {}
 			~MooreMachine();
 			MooreMachine(const MooreMachine& other);
 			MooreMachine& operator=(const MooreMachine& other);
@@ -32,7 +35,7 @@ namespace devsim {
 			int get_priority() { return priority; }
 			void set_priority(int priority) { this->priority = priority; }
 
-			virtual std::string insertion() const = 0;
+			virtual std::string insertion() const { return std::to_string(priority); }
 			friend std::ostream& operator<<(std::ostream&, MooreMachine const&);
 			friend bool operator<(MooreMachine const&, MooreMachine const&);
 			friend bool operator>(MooreMachine const&, MooreMachine const&);

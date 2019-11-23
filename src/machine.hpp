@@ -2,6 +2,7 @@
 #define MACHINE_HPP
 
 #include "mooremachine.hpp"
+#include "totaltime.hpp"
 #include "port.hpp"
 
 class Machine: public devsim::MooreMachine {
@@ -14,7 +15,9 @@ class Machine: public devsim::MooreMachine {
 		devsim::Port<int>* input = nullptr;
 		devsim::Port<int>* output = nullptr;
 
-		Machine(long long t, int priority) { this->t = t; this->set_priority(priority); }
+		Machine(long long t, int priority) : t(t), 
+		                                     input(new devsim::Port<int>()),
+		                                     output(new devsim::Port<int>()) { this->set_priority(priority); }
 		~Machine() { delete input; delete output; }
 		Machine(const Machine& other);
 		Machine& operator=(const Machine& other);
@@ -23,11 +26,9 @@ class Machine: public devsim::MooreMachine {
 
 		void lambda() { output->set(1); }
 
-		void delta_int() { p -= 1; s = t; }
-		void delta_ext(long long e) { s = p == 0 ? t : s - e; p += input->get(); } 
-		void delta_con() { p += input->get() - 1; s = t; }
-
-		std::string insertion() const { return "" + p; }
+		void delta_int(devsim::TotalTime);
+		void delta_ext(devsim::TotalTime); 
+		void delta_con(devsim::TotalTime);
 };
 
 #endif

@@ -59,3 +59,21 @@ Machine& Machine::operator=(const Machine& other) {
 
 	return *this;
 }
+
+void Machine::delta_int(devsim::TotalTime now) {
+	p -= 1;
+	s = t;
+	lastchange = now;
+}
+
+void Machine::delta_ext(devsim::TotalTime now) { 
+	s = p == 0 ? t : s - lastchange.length(now); 
+	p += input->get();
+	lastchange = now; 
+} 
+
+void Machine::delta_con(devsim::TotalTime now) {
+	p += input->get() - 1;
+	s = t;
+	lastchange = now;
+}

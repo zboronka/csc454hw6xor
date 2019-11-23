@@ -16,18 +16,11 @@
 using namespace devsim;
 
 int main() {
-	TotalTime current = TotalTime(0,0);
-
 	Port<int>* in = new Port<int>();
 	Port<int>* out = new Port<int>();
 
 	Machine* press = new Machine(devsim::SECOND,0);
-	press->input = new Port<int>();
-	press->output = new Port<int>();
-
 	Machine* drill = new Machine(devsim::SECOND*2,1);
-	drill->input = new Port<int>();
-	drill->output = new Port<int>();
 
 	Pipe netin = Pipe(in, press->input, nullptr, press);
 	Pipe netout = Pipe(drill->output, out, drill, nullptr);
@@ -58,7 +51,6 @@ int main() {
 		Event e = pqueue->front();
 		pqueue->erase(pqueue->begin());
 		make_heap(pqueue->begin(), pqueue->end(), Event::compare);
-		long long elapse = current.length(e.time);
 
 		if(trajectory.find(e.time.get_real()) != trajectory.end() && e.target == press && e.delta == EXT) {
 			in->set(trajectory[e.time.get_real()]);
@@ -79,7 +71,7 @@ int main() {
 
 		switch(e.delta) {
 			case EXT:
-				e.target->delta_ext(elapse);
+				e.target->delta_ext(e.time);
 				if(e.target->get_internal() != nullptr) {
 					for(auto i = pqueue->begin(); i < pqueue->end(); i++) {
 						if(*e.target->get_internal()==*i) {
@@ -91,11 +83,11 @@ int main() {
 				break;
 			case INT:
 				e.target->lambda();
-				e.target->delta_int();
+				e.target->delta_int(e.time);
 				break;
 			case CON:
 				e.target->lambda();
-				e.target->delta_con();
+				e.target->delta_con(e.time);
 			default:
 				break;
 		}
@@ -113,13 +105,9 @@ int main() {
 			make_heap(pqueue->begin(), pqueue->end(), Event::compare);
 		}
 
-		if(pqueue->empty() || e.time != pqueue->front().time) {
-			current = current.advance(elapse);
-		}
-
 		if(out->available()) {
 			std::cout << colors::OUTPUT << "NETWORK OUT" << colors::RESET << std::endl;
-			std::cout << "Current time: " << current << std::endl;
+			std::cout << "Current time: " << e.time << std::endl;
 			std::cout << out->get() << std::endl << std::endl;
 		}
 	}

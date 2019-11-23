@@ -12,7 +12,7 @@ namespace devsim {
 	}
 
 	bool operator==(Event const& a, Event const& b) {
-		return a.time == b.time && a.delta == b.delta;
+		return a.target == b.target && a.time == b.time && a.delta == b.delta;
 	}
 
 	std::ostream& operator<<(std::ostream& strm, Event const& a) {
@@ -30,7 +30,7 @@ namespace devsim {
 		}
 		strm << colors::RESET;
 		strm << std::endl << "Current time: " << a.time;
-		strm << std::endl << "TARGET " << a.target;
+		strm << std::endl << "TARGET " << *a.target;
 		return strm;
 	}
 }
