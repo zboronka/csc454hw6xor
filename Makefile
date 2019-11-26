@@ -1,4 +1,4 @@
-MAIN=hw6
+MAIN=xornet
 CXX=g++
 CXXFLAGS=-g -std=c++17
 VPATH=src

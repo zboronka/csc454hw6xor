@@ -32,7 +32,7 @@ namespace devsim {
 			Event* get_internal() { return internal; }
 			void set_internal(Event* internal);
 
-			int get_priority() { return priority; }
+			int get_priority() const { return priority; }
 			void set_priority(int priority) { this->priority = priority; }
 
 			virtual std::string insertion() const { return std::to_string(priority); }

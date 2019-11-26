@@ -9,30 +9,48 @@
 #include "port.hpp"
 #include "pipe.hpp"
 #include "totaltime.hpp"
-#include "machine.hpp"
+#include "xor.hpp"
+#include "memory.hpp"
 #include "event.hpp"
 #include "colors.hpp"
 
 using namespace devsim;
 
+struct xorinput {
+	bool x1;
+	bool x2;
+};
+
+std::ostream& operator<<(std::ostream& strm, xorinput const& x) {
+	return strm << "x1: " << (x.x1 ? "true" : "false") << " x2: " << (x.x2 ? "true" : "false");
+}
+
 int main() {
-	Port<int>* in = new Port<int>();
-	Port<int>* out = new Port<int>();
+	Port<bool>* in1 = new Port<bool>();
+	Port<bool>* in2 = new Port<bool>();
+	Port<bool>* out = new Port<bool>();
 
-	Machine* press = new Machine(devsim::SECOND,0);
-	Machine* drill = new Machine(devsim::SECOND*2,1);
+	Xor* xor1 = new Xor(0);
+	Xor* xor2 = new Xor(1);
+	Memory* memory = new Memory(2);
 
-	Pipe netin = Pipe(in, press->input, nullptr, press);
-	Pipe netout = Pipe(drill->output, out, drill, nullptr);
+	Pipe netin1 = Pipe(in1, xor1->x1, nullptr, xor1);
+	Pipe netin2 = Pipe(in2, xor1->x2, nullptr, xor1);
+	Pipe netout = Pipe(xor2->output, out, xor2, nullptr);
 	std::vector<Pipe>* pipes = new std::vector<Pipe>();
-	pipes->push_back(netin);
+	pipes->push_back(netin1);
+	pipes->push_back(netin2);
 	pipes->push_back(netout);
-	{pipes->push_back(Pipe(press->output, drill->input, press, drill));}
+	{
+		pipes->push_back(Pipe(xor1->output, xor2->x1, xor1, xor2));
+		pipes->push_back(Pipe(xor2->output, memory->input, xor2, memory));
+		pipes->push_back(Pipe(memory->output, xor2->x2, memory, xor2));
+	}
 
 	std::vector<Event>* pqueue = new std::vector<Event>();
 
-	std::unordered_map<long long,int> trajectory;
-	std::regex input("\\((\\d*\\.\\d*|\\d*),(\\d*)\\)");
+	std::unordered_map<long long,xorinput> trajectory;
+	std::regex input("\\((\\d*\\.\\d*|\\d*),(true|false),(true|false)\\)");
 	std::smatch matches;
 
 	std::string command;
@@ -41,10 +59,21 @@ int main() {
 		auto words_end = std::sregex_iterator();
 		for(std::sregex_iterator i = words_begin; i != words_end; i++) {
 			long long time = (long long)devsim::SECOND*atof((*i)[1].str().c_str());
-			pqueue->push_back(Event(EXT, TotalTime(time, 0), press));
+			pqueue->push_back(Event(EXT, TotalTime(time, 0), xor1));
 			make_heap(pqueue->begin(), pqueue->end(), Event::compare);
-			trajectory[time] = atoi((*i)[2].str().c_str());
+			xorinput x;
+			x.x1 = (*i)[2].str().compare("true") == 0;
+			x.x2 = (*i)[3].str().compare("true") == 0;
+			trajectory[time] = x;
 		}
+	}
+
+	// Make every model start ticking at time 0
+	{
+		pqueue->push_back(Event(EXT, TotalTime(0, 0), xor1));
+		pqueue->push_back(Event(EXT, TotalTime(0, 0), xor2));
+		pqueue->push_back(Event(EXT, TotalTime(0, 0), memory));
+		make_heap(pqueue->begin(), pqueue->end(), Event::compare);
 	}
 
 	while(!pqueue->empty()) {
@@ -52,9 +81,11 @@ int main() {
 		pqueue->erase(pqueue->begin());
 		make_heap(pqueue->begin(), pqueue->end(), Event::compare);
 
-		if(trajectory.find(e.time.get_real()) != trajectory.end() && e.target == press && e.delta == EXT) {
-			in->set(trajectory[e.time.get_real()]);
-			netin.pipe();
+		if(trajectory.find(e.time.get_real()) != trajectory.end() && e.target == xor1 && e.delta == EXT) {
+			in1->set(trajectory[e.time.get_real()].x1);
+			in2->set(trajectory[e.time.get_real()].x2);
+			netin1.pipe();
+			netin2.pipe();
 			std::cout << colors::INPUT << "NETWORK IN" << colors::RESET << std::endl;
 			std::cout << "Current time: " << e.time << std::endl;
 			std::cout << trajectory[e.time.get_real()] << std::endl << std::endl;
@@ -94,7 +125,12 @@ int main() {
 
 		for(Pipe pipe : *pipes) {
 			if(pipe.pipe() && pipe.output_machine != nullptr) {
-				pqueue->push_back(Event(EXT, e.time, pipe.output_machine));
+				if(pipe.output_machine->get_priority() < e.target->get_priority()) {
+					pqueue->push_back(Event(EXT, e.time.advance(TotalTime(0,1)), pipe.output_machine));
+				}
+				else {
+					pqueue->push_back(Event(EXT, e.time, pipe.output_machine));
+				}
 				make_heap(pqueue->begin(), pqueue->end(), Event::compare);
 			}
 		}
@@ -108,14 +144,20 @@ int main() {
 		if(out->available()) {
 			std::cout << colors::OUTPUT << "NETWORK OUT" << colors::RESET << std::endl;
 			std::cout << "Current time: " << e.time << std::endl;
-			std::cout << out->get() << std::endl << std::endl;
+			std::cout << (out->get() ? "true" : "false") << std::endl << std::endl;
+		}
+
+		if(e.time.get_real() > devsim::SECOND*10) {
+			break;
 		}
 	}
 
-	delete in;
+	delete in1;
+	delete in2;
 	delete out;
 	delete pipes;
-	delete drill;
-	delete press;
+	delete xor1;
+	delete xor2;
+	delete memory;
 	delete pqueue;
 }
